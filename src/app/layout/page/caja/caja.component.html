@@ -1,47 +1,186 @@
-<div class="container my-3">
-  <div class="row py-4 bgwhite">
-    <div class="col-md-6">
-      <h2>Cajas</h2>
+<div class="container py-4">
+  <div class="card shadow border py-4 bgwhite">
+    <div class="col-md-12">
 
-        <form>
-          <!-- Primera columna -->
-          <div class="mb-3">
-            <label for="codigo" class="form-label">Codigo</label>
-            <input type="number" class="form-control" id="codigo" placeholder="Code" autofocus>
+      <div class="custom-card ">
+        <h2 class="d-flex">Cajas <button class="btn btn-outline-success ml-auto mx-2" (click)="toggleFormulario()">Crear</button> </h2>
+        <div [formGroup]="formCaja" class="row" *ngIf="mostrarFormulario">
+
+          <div class="mb-3 col-md-6">
+            <label class="form-label-bold">Código:</label>
+            <input type="text" formControlName="codigo" class="form-control" placeholder="Código">
+            <div style="display: flex; flex-direction: column;" class="my-2">
+              <div class="alert alert-danger mx-2" [hidden]="codigo.valid || codigo.pristine">
+                <span *ngIf="codigo.errors?.['required']">
+                  El código es obligatorio
+                </span>
+                <span *ngIf="codigo.errors?.['minlength']">
+                  Debe tener al menos 3 caracteres
+                </span>
+                <span *ngIf="codigo.errors?.['maxlength']">
+                  Debe tener menos de 20 caracteres
+                </span>
+              </div>
+            </div>
           </div>
-          <div class="mb-3">
-            <label for="apellidos" class="form-label">Descripcion</label>
-            <input type="text" class="form-control" id="apellidos" placeholder="Your Last Name" autofocus>
+
+          <div class="mb-3 col-md-6">
+            <label class="form-label-bold">Descripción:</label>
+            <input type="text" formControlName="descripcion" class="form-control" placeholder="Descripción">
+            <div style="display: flex; flex-direction: column;" class="my-2">
+              <div class="alert alert-danger mx-2" [hidden]="descripcion.valid || descripcion.pristine">
+                <span *ngIf="descripcion.errors?.['required']">
+                  La descripción es obligatoria
+                </span>
+                <span *ngIf="descripcion.errors?.['minlength']">
+                  Debe tener al menos 3 caracteres
+                </span>
+                <span *ngIf="descripcion.errors?.['maxlength']">
+                  Debe tener menos de 20 caracteres
+                </span>
+                <span *ngIf="descripcion.errors?.['pattern']">
+                  Solo se permiten letras y espacios
+                </span>
+              </div>
+            </div>
           </div>
-          <div class="mb-3">
-            <label for="fechaHasta" class="form-label">Fecha Ingreso</label>
-            <input type="date" class="form-control" id="fechaHasta" autofocus>
+
+          <div class="mb-3 col-md-6">
+            <label class="form-label-bold">Fecha de Ingreso:</label>
+            <input type="date" formControlName="fechaIngreso" class="form-control" placeholder="Fecha de Ingreso">
+            <div style="display: flex; flex-direction: column;" class="my-2">
+              <div class="alert alert-danger mx-2" [hidden]="fechaIngreso.valid || fechaIngreso.pristine">
+                <span *ngIf="fechaIngreso.errors?.['required']">
+                  La fecha de ingreso es obligatoria
+                </span>
+              </div>
+            </div>
           </div>
-        </form>
+
+          <div class="mb-3 col-md-6">
+            <label class="form-label-bold">Fecha Hasta:</label>
+            <input type="date" formControlName="fechaHasta" class="form-control" placeholder="Fecha Hasta">
+            <div style="display: flex; flex-direction: column;" class="my-2">
+              <div class="alert alert-danger mx-2" [hidden]="fechaHasta.valid || fechaHasta.pristine">
+                <span *ngIf="fechaHasta.errors?.['required']">
+                  La fecha hasta es obligatoria
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <div class="mb-3 col-md-6">
+            <label class="form-label-bold">Estatus:</label>
+            <input type="text" formControlName="estatus" class="form-control" placeholder="Estatus">
+            <div style="display: flex; flex-direction: column;" class="my-2">
+              <div class="alert alert-danger mx-2" [hidden]="estatus.valid || estatus.pristine">
+                <span *ngIf="estatus.errors?.['required']">
+                  El estatus es obligatorio
+                </span>
+                <span *ngIf="estatus.errors?.['minlength']">
+                  Debe tener al menos 3 caracteres
+                </span>
+                <span *ngIf="estatus.errors?.['maxlength']">
+                  Debe tener menos de 20 caracteres
+                </span>
+                <span *ngIf="estatus.errors?.['pattern']">
+                  Solo se permiten letras y espacios
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <div class="mb-3 col-md-6">
+            <label class="form-label-bold">Código de Oficina:</label>
+            <input type="text" formControlName="codOficina" class="form-control" placeholder="Código de Oficina">
+            <div style="display: flex; flex-direction: column;" class="my-2">
+              <div class="alert alert-danger mx-2" [hidden]="codOficina.valid || codOficina.pristine">
+                <span *ngIf="codOficina.errors?.['required']">
+                  El código de oficina es obligatorio
+                </span>
+                <span *ngIf="codOficina.errors?.['minlength']">
+                  Debe tener al menos 3 caracteres
+                </span>
+                <span *ngIf="codOficina.errors?.['maxlength']">
+                  Debe tener menos de 20 caracteres
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-12">
+            <div class="d-flex justify-content-end mt-3">
+              <button class="btn btn-success mx-2" [disabled]="formCaja.invalid">Guardar</button>
+              <button class="btn btn-danger" (click)="toggleFormulario()">Cerrar</button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+        <hr>
+
+        <div class="custom-card table-responsive">
+
+          <table class="custom-table  mb-3 col-lg-6 col-md-12 " mat-table [dataSource]="dataSource">
+            <!-- Código Column -->
+            <ng-container matColumnDef="codigo">
+              <th mat-header-cell *matHeaderCellDef> Código </th>
+              <td mat-cell *matCellDef="let caja"> {{caja.codigo}} </td>
+            </ng-container>
+
+            <!-- Descripción Column -->
+            <ng-container matColumnDef="descripcion">
+              <th mat-header-cell *matHeaderCellDef> Descripción </th>
+              <td mat-cell *matCellDef="let caja"> {{caja.descripcion}} </td>
+            </ng-container>
+
+            <!-- Fecha de Ingreso Column -->
+            <ng-container matColumnDef="fechaIngreso">
+              <th mat-header-cell *matHeaderCellDef> Fecha de Ingreso </th>
+              <td mat-cell *matCellDef="let caja"> {{caja.fechaIngreso | date}} </td>
+            </ng-container>
+
+            <!-- Fecha Hasta Column -->
+            <ng-container matColumnDef="fechaHasta">
+              <th mat-header-cell *matHeaderCellDef> Fecha Hasta </th>
+              <td mat-cell *matCellDef="let caja"> {{caja.fechaHasta | date}} </td>
+            </ng-container>
+
+            <!-- Estatus Column -->
+            <ng-container matColumnDef="estatus">
+              <th mat-header-cell *matHeaderCellDef> Estatus </th>
+              <td mat-cell *matCellDef="let caja"> {{caja.estatus}} </td>
+            </ng-container>
+
+            <!-- Código de Oficina Column -->
+            <ng-container matColumnDef="codOficina">
+              <th mat-header-cell *matHeaderCellDef> Código de Oficina </th>
+              <td mat-cell *matCellDef="let caja"> {{caja.codOficina}} </td>
+            </ng-container>
+
+            <!-- Edit Column -->
+            <ng-container matColumnDef="edit">
+              <th mat-header-cell *matHeaderCellDef> Editar </th>
+              <td mat-cell *matCellDef="let caja">
+                <button class="btn btn-warning">Edit</button>
+              </td>
+            </ng-container>
+
+            <!-- Delete Column -->
+            <ng-container matColumnDef="delete">
+              <th mat-header-cell *matHeaderCellDef> Eliminar </th>
+              <td mat-cell *matCellDef="let caja">
+                <button class="btn btn-danger">Delete</button>
+              </td>
+            </ng-container>
+            <tr mat-header-row class="custom-header-row" *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row class="custom-row" *matRowDef="let caja; columns: displayedColumns"></tr>
+          </table>
+
+          <mat-paginator class="custom-paginator" [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+
+        </div>
+
     </div>
-
-    <div class="col-md-6">
-      <h2>&nbsp;</h2> <!-- Espacio para el título de la segunda columna -->
-
-        <form>
-          <div class="mb-3">
-            <label for="nombres" class="form-label">Estatus</label>
-            <input type="text" class="form-control" id="nombres" placeholder="Your Name" autofocus>
-          </div>
-          <div class="mb-3">
-            <label for="rol" class="form-label">Codigo de oficina</label>
-            <input type="text" class="form-control" id="rol" placeholder="Your Rol" autofocus>
-          </div>
-          <div class="mb-3">
-            <label for="fechaIngreso" class="form-label">Fecha Ingreso</label>
-            <input type="date" class="form-control" id="fechaIngreso" autofocus>
-          </div>
-        </form>
-      </div>
-      <div class="d-flex ml-auto">
-        <button class="btn btn-success mx-2 ">Guardar</button>
-        <button class="btn btn-secondary mx-2 ">Limpiar</button>
-      </div>
-
   </div>
 </div>

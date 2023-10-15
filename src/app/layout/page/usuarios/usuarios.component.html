@@ -1,56 +1,188 @@
-<div class="container my-3">
-  <div class="row py-4 bgwhite">
-    <div class="col-md-6">
-      <h2>Usuarios</h2>
+<div class="container py-4">
+  <div class="card shadow border py-4 bgwhite">
+    <div class="col-md-12">
 
-        <form>
-          <!-- Primera columna -->
-          <div class="mb-3">
-            <label for="codigo" class="form-label">Codigo</label>
-            <input type="number" class="form-control" id="codigo" placeholder="Code" autofocus>
-          </div>
-          <div class="mb-3">
-            <label for="apellidos" class="form-label">Apellidos</label>
-            <input type="text" class="form-control" id="apellidos" placeholder="Your Last Name" autofocus>
-          </div>
-          <div class="mb-3">
-            <label for="fechaHasta" class="form-label">Fecha Hasta</label>
-            <input type="date" class="form-control" id="fechaHasta" autofocus>
-          </div>
-          <div class="mb-3">
-            <label for="estatus" class="form-label">Estatus</label>
-            <input type="text" class="form-control" id="estatus" placeholder="Status" autofocus>
-          </div>
-        </form>
-    </div>
+      <div class="custom-card ">
+        <h2 class="d-flex">Usuarios <button class="btn btn-outline-success ml-auto mx-2" (click)="toggleFormulario()"  >Crear</button> </h2>
 
-    <div class="col-md-6">
-      <h2>&nbsp;</h2> <!-- Espacio para el título de la segunda columna -->
+        <div [formGroup]="formUser"  class="row" *ngIf="mostrarFormulario">
 
-        <form>
-          <div class="mb-3">
-            <label for="nombres" class="form-label">Nombres</label>
-            <input type="text" class="form-control" id="nombres" placeholder="Your Name" autofocus>
-          </div>
-          <div class="mb-3">
-            <label for="rol" class="form-label">Rol de usuarios</label>
-            <input type="text" class="form-control" id="rol" placeholder="Your Rol" autofocus>
-          </div>
-          <div class="mb-3">
-            <label for="fechaIngreso" class="form-label">Fecha Ingreso</label>
-            <input type="date" class="form-control" id="fechaIngreso" autofocus>
-          </div>
-        </form>
+          <div class="mb-3 col-md-6" >
+            <label class="form-label-bold">Nombre:</label>
+            <input type="text" formControlName="name" class="form-control" placeholder="Escribe tu nombre">
+            <div style="display: flex; flex-direction: column;" class=" my-2">
 
-        <div class="d-flex justify-content-end">
-          <button class="btn btn-success btn-lg btn-block" (click)="openDialog()">Detalles</button>
+              <div class="alert alert-danger mx-2" [hidden]="name.valid || name.pristine">
+                <span *ngIf="name.errors?.['required']">
+                  El nombre es obligatorio
+                </span>
+                <span *ngIf="name.errors?.['minlength']">
+                  Debe tener al menos 3 caracteres
+                </span>
+                <span *ngIf="name.errors?.['maxlength']">
+                  Debe tener menos de 20 caracteres
+                </span>
+                <span *ngIf="name.errors?.['pattern']">
+                  Solo se permiten letras y espacios
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <div class="mb-3 col-md-6" >
+            <label class="form-label-bold">Apellidos:</label>
+            <input type="text" formControlName="lastname" class="form-control" placeholder="Escribe tu apellido">
+            <div style="display: flex; flex-direction: column;" class=" my-2">
+              <div class="alert alert-danger mx-2" [hidden]="lastname.valid || lastname.pristine">
+                <span *ngIf="lastname.errors?.['required']">
+                  La dirección es obligatoria
+                </span>
+                <span *ngIf="lastname.errors?.['minlength']">
+                  Debe tener al menos 3 caracteres
+                </span>
+                <span *ngIf="lastname.errors?.['maxlength']">
+                  Debe tener menos de 20 caracteres
+                </span>
+                <span *ngIf="lastname.errors?.['pattern']">
+                  Solo se permiten letras y espacios
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <div class="mb-3 col-md-6" >
+            <label class="form-label-bold">Codigo:</label>
+            <input type="text" formControlName="code" class="form-control" placeholder="Escribe tu Codigo">
+            <div style="display: flex; flex-direction: column;" class=" my-2">
+              <div class="alert alert-danger mx-2" [hidden]="code.valid || code.pristine">
+                <span *ngIf="code.errors?.['required']">
+                  La dirección es obligatoria
+                </span>
+                <span *ngIf="code.errors?.['minlength']">
+                  Debe tener al menos 3 caracteres
+                </span>
+                <span *ngIf="code.errors?.['maxlength']">
+                  Debe tener menos de 20 caracteres
+                </span>
+              </div>
+            </div>
+          </div>
+
+
+
+          <div class="mb-3 col-md-6" >
+            <label class="form-label-bold">Rol del Usuario:</label>
+            <input type="text" formControlName="rol" class="form-control" placeholder="Ingresa tu Rol">
+            <div style="display: flex; flex-direction: column;" class=" my-2">
+              <div class="alert alert-danger mx-2" [hidden]="rol.valid || rol.pristine">
+                <span *ngIf="rol.errors?.['required']">
+                La dirección es obligatoria
+                </span>
+                <span *ngIf="rol.errors?.['minlength']">
+                  Debe tener al menos 3 caracteres
+                </span>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="mb-3 col-md-6" >
+            <label class="form-label-bold">Fecha Hasta:</label>
+            <input type="date" formControlName="dateTo" class="form-control" placeholder="fecha hasta">
+            <div style="display: flex; flex-direction: column;" class=" my-2">
+              <div class="alert alert-danger mx-2" [hidden]="dateTo.valid || dateTo.pristine">
+                <span *ngIf="dateTo.errors?.['required']">
+                La dirección es obligatoria
+                </span>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="mb-3 col-md-6" >
+            <label class="form-label-bold">Fecha Ingreso:</label>
+            <input type="date" formControlName="dateAd" class="form-control" placeholder="fecha ingreso">
+            <div style="display: flex; flex-direction: column;" class=" my-2">
+              <div class="alert alert-danger mx-2" [hidden]="dateAd.valid || dateAd.pristine">
+                <span *ngIf="dateAd.errors?.['required']">
+                La dirección es obligatoria
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-12">
+            <div class="d-flex justify-content-end mt-3">
+              <button class="btn btn-success mx-2" [disabled]="formUser.invalid">Guardar</button>
+              <button class="btn btn-danger" (click)="toggleFormulario()">Cerrar</button>
+            </div>
+          </div>
+
         </div>
       </div>
+        <hr>
 
-      <div class="d-flex  ml-auto">
-        <button class="btn btn-success  mx-2">Guardar</button>
-        <button class="btn btn-secondary mx-2">Limpiar</button>
+        <div class="custom-card table-responsive">
+
+          <table class="custom-table mb-3 col-lg-6 col-md-12" mat-table [dataSource]="dataSource">
+            <!-- Name Column -->
+            <ng-container matColumnDef="name">
+              <th mat-header-cell *matHeaderCellDef> Nombre </th>
+              <td mat-cell *matCellDef="let usuarios"> {{usuarios.name}} </td>
+            </ng-container>
+
+            <!-- Lastname Column -->
+            <ng-container matColumnDef="lastname">
+              <th mat-header-cell *matHeaderCellDef> Apellidos </th>
+              <td mat-cell *matCellDef="let usuarios"> {{usuarios.lastname}} </td>
+            </ng-container>
+
+            <!-- Code Column -->
+            <ng-container matColumnDef="code">
+              <th mat-header-cell *matHeaderCellDef> Codigo </th>
+              <td mat-cell *matCellDef="let usuarios"> {{usuarios.code}} </td>
+            </ng-container>
+
+            <!-- Rol Column -->
+            <ng-container matColumnDef="rol">
+              <th mat-header-cell *matHeaderCellDef> Roles </th>
+              <td mat-cell *matCellDef="let usuarios"> {{usuarios.rol}} </td>
+            </ng-container>
+
+            <!-- DateTo Column -->
+            <ng-container matColumnDef="dateTo">
+              <th mat-header-cell *matHeaderCellDef> Fecha Ingreso </th>
+              <td mat-cell *matCellDef="let usuarios"> {{usuarios.dateTo |  date}} </td>
+            </ng-container>
+
+            <!-- DateAd Column -->
+            <ng-container matColumnDef="dateAd">
+              <th mat-header-cell *matHeaderCellDef> Fecha Hasta </th>
+              <td mat-cell *matCellDef="let usuarios"> {{usuarios.dateAd |  date}} </td>
+            </ng-container>
+
+            <!-- Edit Column -->
+            <ng-container matColumnDef="edit">
+              <th mat-header-cell *matHeaderCellDef> Editar </th>
+              <td mat-cell *matCellDef="let usuarios">
+                <button class="btn btn-warning">Edit</button>
+              </td>
+            </ng-container>
+
+            <!-- Delete Column -->
+            <ng-container matColumnDef="delete">
+              <th mat-header-cell *matHeaderCellDef> Eliminar </th>
+              <td mat-cell *matCellDef="let usuarios">
+                <button class="btn btn-danger">Delete</button>
+              </td>
+            </ng-container>
+            <tr mat-header-row class="custom-header-row" *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row class="custom-row" *matRowDef="let usuario; columns: displayedColumns"></tr>
+          </table>
+
+          <mat-paginator class="custom-paginator" [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+        </div>
+
       </div>
-
   </div>
 </div>

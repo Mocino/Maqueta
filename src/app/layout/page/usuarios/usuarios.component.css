@@ -2,6 +2,48 @@
 .bgwhite{
   background-color: #ffff;  /* fallback for old browsers */
 }
+
 .Detalle {
   margin-bottom: 10px;
 }
+
+.form-label-bold {
+  font-weight: bold;
+  color: #001f3f; /* Cambia esto al color azul marino deseado */
+}
+
+
+.custom-card {
+  background-color: #fff; /* Color de fondo blanco */
+  padding: 20px;
+  border-radius: 10px; /* Bordes redondeados */
+  box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.1); /* Sombra suave */
+}
+
+.custom-table {
+  width: 100%;
+  border-collapse: collapse; /* Bordes colapsados */
+}
+
+.custom-table th,
+.custom-table td {
+  padding: 10px;
+  text-align: center;
+  border-bottom: 1px solid #ddd; /* Borde inferior del encabezado y las celdas */
+}
+
+.custom-header-row {
+  background-color: #3498db; /* Color de fondo del encabezado */
+  color: #fff; /* Color de texto en el encabezado */
+  font-weight: bold; /* Texto en negrita */
+}
+
+.custom-row:nth-child(even) {
+  background-color: #f2f2f2; /* Color de fondo de las filas pares */
+}
+
+.custom-paginator {
+  margin-top: 20px; /* Espacio superior entre la tabla y el paginador */
+}
+
+

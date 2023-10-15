@@ -1,0 +1,153 @@
+<div class="container py-4">
+  <div class="card shadow border py-4 bgwhite">
+    <div class="col-md-12">
+
+      <div class="custom-card ">
+
+      <h2 class="d-flex">Contactos <button class="btn btn-outline-success ml-auto mx-2" (click)="toggleFormulario()"  >Crear</button> </h2>
+    </div>
+      <div [formGroup]="formUser"  class="row" *ngIf="mostrarFormulario">
+
+        <div class="mb-3 col-md-6" >
+          <label class="form-label-bold">Address:</label>
+          <input type="text" formControlName="_adress" class="form-control" placeholder="Your address">
+          <div style="display: flex; flex-direction: column;" class=" my-2">
+            <div class="alert alert-danger mx-2" [hidden]="_adress.valid || _adress.pristine">
+              <span *ngIf="_adress.errors?.['required']">
+                La dirección es obligatoria
+              </span>
+              <span *ngIf="_adress.errors?.['minlength']">
+                Debe tener al menos 3 caracteres
+              </span>
+              <span *ngIf="_adress.errors?.['maxlength']">
+                Debe tener menos de 20 caracteres
+              </span>
+              <span *ngIf="_adress.errors?.['pattern']">
+                Solo se permiten letras y espacios
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <div class="mb-3 col-md-6" >
+          <label class="form-label-bold">City:</label>
+          <input type="text" formControlName="city" class="form-control" placeholder="Your city">
+          <div style="display: flex; flex-direction: column;" class=" my-2">
+            <div class="alert alert-danger mx-2" [hidden]="city.valid || city.pristine">
+              <span *ngIf="city.errors?.['required']">
+                La ciudad es obligatoria
+              </span>
+              <span *ngIf="city.errors?.['minlength']">
+                Debe tener al menos 3 caracteres
+              </span>
+              <span *ngIf="city.errors?.['maxlength']">
+                Debe tener menos de 20 caracteres
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <div class="mb-3 col-md-6" >
+          <label class="form-label-bold">Country:</label>
+          <input type="text" formControlName="country" class="form-control" placeholder="Your rol">
+          <div style="display: flex; flex-direction: column;" class=" my-2">
+            <div class="alert alert-danger mx-2" [hidden]="country.valid || country.pristine">
+              <span *ngIf="country.errors?.['required']">
+              La dirección es obligatoria
+              </span>
+              <span *ngIf="country.errors?.['minlength']">
+                Debe tener al menos 3 caracteres
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <div class="mb-3 col-md-6" >
+          <label class="form-label-bold">Postal_code:</label>
+          <input type="text" formControlName="Postal_code" class="form-control" placeholder="Date">
+          <div style="display: flex; flex-direction: column;" class=" my-2">
+            <div class="alert alert-danger mx-2" [hidden]="Postal_code.valid || Postal_code.pristine">
+              <span *ngIf="Postal_code.errors?.['required']">
+              La dirección es obligatoria
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <div class="mb-3 col-md-6" >
+          <label class="form-label-bold">About Me:</label>
+          <input type="text" formControlName="AboutMe" class="form-control" placeholder="About Me">
+          <div style="display: flex; flex-direction: column;" class=" my-2">
+            <div class="alert alert-danger mx-2" [hidden]="AboutMe.valid || AboutMe.pristine">
+              <span *ngIf="AboutMe.errors?.['required']">
+              La dirección es obligatoria
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-12">
+          <div class="d-flex justify-content-end mt-3">
+            <button class="btn btn-success mx-2" [disabled]="formUser.invalid">Guardar</button>
+            <button class="btn btn-danger" (click)="toggleFormulario()">Cerrar</button>
+          </div>
+        </div>
+
+      </div>
+        <hr>
+
+        <div class="custom-card table-responsive">
+          <table class="custom-table  mb-3 col-lg-6 col-md-12" mat-table [dataSource]="dataSource">
+            <!-- Adress Column -->
+            <ng-container matColumnDef="adress">
+              <th mat-header-cell *matHeaderCellDef> Address </th>
+              <td mat-cell *matCellDef="let element"> {{element.adress}} </td>
+            </ng-container>
+
+            <!-- City Column -->
+            <ng-container matColumnDef="city">
+              <th mat-header-cell *matHeaderCellDef> City </th>
+              <td mat-cell *matCellDef="let element"> {{element.city}} </td>
+            </ng-container>
+
+            <!-- Country Column -->
+            <ng-container matColumnDef="country">
+              <th mat-header-cell *matHeaderCellDef> Country </th>
+              <td mat-cell *matCellDef="let element"> {{element.country}} </td>
+            </ng-container>
+
+            <!-- Postal Code Column -->
+            <ng-container matColumnDef="Postal_Code">
+              <th mat-header-cell *matHeaderCellDef> Postal Code </th>
+              <td mat-cell *matCellDef="let element"> {{element.Postal_Code}} </td>
+            </ng-container>
+
+            <tr mat-header-row class="custom-header-row" *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row class="custom-row" *matRowDef="let row; columns: displayedColumns;"></tr>
+
+            <!-- Edit Column -->
+            <ng-container matColumnDef="edit">
+              <th mat-header-cell *matHeaderCellDef> Edit </th>
+              <td mat-cell *matCellDef="let element">
+                <button  class="btn btn-warning">Edit</button>
+              </td>
+            </ng-container>
+
+            <!-- Delete Column -->
+            <ng-container matColumnDef="delete">
+              <th mat-header-cell *matHeaderCellDef> Delete </th>
+              <td mat-cell *matCellDef="let element">
+                <button class="btn btn-danger">Delete</button>
+              </td>
+            </ng-container>
+
+
+          </table>
+
+
+          <mat-paginator class="custom-paginator" [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons aria-label="Select page of periodic elements"></mat-paginator>
+        </div>
+
+    </div>
+  </div>
+</div>
